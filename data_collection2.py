@@ -4,8 +4,8 @@ import pandas as pd
 from google.cloud import storage
 import requests
 from urllib.parse import urlencode
-import dask.dataframe as dd
-import pyarrow as pa 
+# import dask.dataframe as dd
+# import pyarrow as pa 
 
 class GCSUploader:
     def __init__(self, bucket_name):
@@ -81,20 +81,14 @@ class DataHandler:
             self.start += chunk_size
             n_extract += chunk_size
             print(n_extract, " files extracted")
-            # Upload the CSV file to GCS after every 20000 records
-            if n_extract % self.gcs_blob_rows == 0 and len(dataframe) != 0:
+    
+
+            if n_extract % self.gcs_blob_rows == 0:
                 try:
                     dataframe['arXiv_PDF_Link'] = dataframe['bibcode'].apply(lambda x: f"https://ui.adsabs.harvard.edu/link_gateway/{x}/EPRINT_PDF")
                 except:
                     dataframe['arXiv_PDF_Link'] = None
-                # file_name = f"data_chunk_{int(len(dataframe)/self.gcs_blob_rows)}.parquet"
-                # ddf = dd.from_pandas(dataframe, npartitions = 20)
-                # # ddf.to_parquet(file_name, schema = self.schema)
-                # ddf.to_parquet(f'gs://{uploader.bucket}/search_api_data/{file_name}', schema = self.schema)
-                # uploader.upload_blob(file_name, "search_api_data/" + file_name)  # TODO: replace with your desired object name in GCS
-                # print(file_name, ' uploaded successfully')
-                
-                
+
                 file_name = f"data_chunk_{n_extract//self.gcs_blob_rows}.csv"
                 # ddf = dd.from_pandas(dataframe, npartitions = 20)
                 # ddf.to_parquet(file_name, schema = self.schema)

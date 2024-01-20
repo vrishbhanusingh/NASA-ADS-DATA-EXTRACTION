@@ -10,5 +10,6 @@ google-cloud-storage = "*"
 label-studio-sdk = "*"
 pandas = "*"
 
+
 [requires]
 python_version = "3.8"

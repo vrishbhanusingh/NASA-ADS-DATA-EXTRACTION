@@ -168,7 +168,7 @@ if __name__ == "__main__":
     parser.add_argument('--query', default ="year:2013-2023",type=str, help='Query')
     
     parser.add_argument('--max_rows', default = 1000000, type=int, help='Maximum number of rows')
-    parser.add_argument('--gcs_blob_rows', default = 80000, type=int, help='Maximum number of rows')
+    parser.add_argument('--gcs_blob_rows', default = 4000, type=int, help='Maximum number of rows')
     parser.add_argument('--start',default =0, type=int, help='Start')
     
     parser.add_argument('--params',default ="bibcode,id,author,title,year,doi,keyword,\
