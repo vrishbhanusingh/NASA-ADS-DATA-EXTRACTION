@@ -27,20 +27,20 @@ class DataHandler:
         self.sort = sort
         self.subset = subset
         self.gcs_blob_rows = gcs_blob_rows
-        self.schema = {'bibcode': pa.string(),
-                       'abstract': pa.string(),
-                       'author': pa.list_(pa.string()),
-                       'doi': pa.list_(pa.string()),
-                       'id': pa.string(),
-                       'keyword': pa.list_(pa.string()),
-                       'title': pa.list_(pa.string()),
-                       'year': pa.string(),
-                       'read_count': pa.int64(),
-                       'classic_factor': pa.int64(),
-                       'reference': pa.list_(pa.string()),
-                       'citation_count': pa.int64(),
-                       'arXiv_PDF_Link': pa.string(),
-                       '__null_dask_index__': pa.int64()}
+        # self.schema = {'bibcode': pa.string(),
+        #                'abstract': pa.string(),
+        #                'author': pa.list_(pa.string()),
+        #                'doi': pa.list_(pa.string()),
+        #                'id': pa.string(),
+        #                'keyword': pa.list_(pa.string()),
+        #                'title': pa.list_(pa.string()),
+        #                'year': pa.string(),
+        #                'read_count': pa.int64(),
+        #                'classic_factor': pa.int64(),
+        #                'reference': pa.list_(pa.string()),
+        #                'citation_count': pa.int64(),
+        #                'arXiv_PDF_Link': pa.string(),
+        #                '__null_dask_index__': pa.int64()}
 
     def fetch_data(self, query, start=0, rows=2000, params=None, sort=None, subset=None, **kwargs):
         # API query
