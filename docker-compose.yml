@@ -9,12 +9,12 @@ services:
         container_name: data-label-cli
         volumes:
             - ../secrets:/secrets
-            - ../data-labeling:/app
+            - ../data-extraction:/app 
         environment:
-            GOOGLE_APPLICATION_CREDENTIALS: /secrets/data-service-account.json
-            GCP_PROJECT: "ac215-project"
+            GOOGLE_APPLICATION_CREDENTIALS: /secrets/secret-heaven-312408-d2eb79bdeadd.json
+            GCP_PROJECT: "secret-heaven-312408"
             GCP_ZONE: "us-central1-a"
-            GCS_BUCKET_NAME: "mushroom-app-data-demo"
+            GCS_BUCKET_NAME: "ai5_nasa_ads_data"
             LABEL_STUDIO_URL: "http://data-label-studio:8080"
         depends_on:
             - data-label-studio
@@ -30,6 +30,6 @@ services:
             LABEL_STUDIO_DISABLE_SIGNUP_WITHOUT_LINK: "true"
             LABEL_STUDIO_USERNAME: "pavlos@seas.harvard.edu"
             LABEL_STUDIO_PASSWORD: "awesome"
-            GOOGLE_APPLICATION_CREDENTIALS: /secrets/data-service-account.json
-            GCP_PROJECT: "ac215-project"
+            GOOGLE_APPLICATION_CREDENTIALS: /secrets/secret-heaven-312408-d2eb79bdeadd.json
+            GCP_PROJECT: "secret-heaven-312408"
             GCP_ZONE: "us-central1-a"

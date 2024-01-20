@@ -7,6 +7,7 @@ import traceback
 import time
 from google.cloud import storage
 from label_studio_sdk import Client
+from data_collection2 import *
 
 
 GCS_BUCKET_NAME = os.environ["GCS_BUCKET_NAME"]
@@ -102,8 +103,15 @@ def get_project_tasks(api_key):
     for labeled_task in labeled_tasks:
         print("Annotations:", labeled_task["annotations"])
 
+def extract_and_upload_data(args=None):
+    uploader = GCSUploader(GCS_BUCKET_NAME)  # TODO: replace with your bucket name
+    handler = DataHandler(args.api_token, args.max_rows, args.start, args.params, args.sort, args.subset, gcs_blob_rows = args.gcs_blob_rows)
+    handler.fetch_and_update_dataframe(uploader, args.query)
 
 def main(args=None):
+    if args.extract:
+        extract_and_upload_data(args)
+    
     if args.cors:
         set_cors_configuration()
 
@@ -119,6 +127,8 @@ def main(args=None):
 
     if args.tasks:
         get_project_tasks(args.key)
+        
+    
 
 
 if __name__ == "__main__":
@@ -131,6 +141,13 @@ if __name__ == "__main__":
         "--cors",
         action="store_true",
         help="Set the CORS configuration on a GCS bucket",
+    )
+    
+    parser.add_argument(
+        "-e",
+        "--extract",
+        action="store_true",
+        help="extract data from nasa/ads and upload to a GCS bucket",
     )
     parser.add_argument(
         "-m",
@@ -146,6 +163,22 @@ if __name__ == "__main__":
     )
     parser.add_argument("-k", "--key", default="", help="Label Studio API Key")
 
+    parser.add_argument('--api_token', default = 'Bde9txgkHsD5UDCAEV0hdDnk6mHJ2PD7ccyvT4G3',type=str, help='API token')
+    
+    parser.add_argument('--query', default ="year:2013-2023",type=str, help='Query')
+    
+    parser.add_argument('--max_rows', default = 1000000, type=int, help='Maximum number of rows')
+    parser.add_argument('--gcs_blob_rows', default = 80000, type=int, help='Maximum number of rows')
+    parser.add_argument('--start',default =0, type=int, help='Start')
+    
+    parser.add_argument('--params',default ="bibcode,id,author,title,year,doi,keyword,\
+        abstract,classic_factor,citation_count,read_count,reference_count,reference,\
+            readers,metrics", type=str, help='Parameters')
+    
+    parser.add_argument('--sort',default ="classic_factor desc", type=str, help='Sort')
+    
+    parser.add_argument('--subset',default ="database:astronomy", type=str, help='Subset')
+    
     args = parser.parse_args()
 
     main(args)
