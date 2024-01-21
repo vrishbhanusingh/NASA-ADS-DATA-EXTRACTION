@@ -16,7 +16,7 @@ This is the data collection repo for the space scribe project for AI-5. We will 
 
 ![image](https://hackmd.io/_uploads/r19oLg5F6.png)
 
-
+The code seen here is mostly forked from the github repo of AI-5 lecture 6 tutorials about container networks and dataset versioning. 
 ## Usage
 * Have Docker installed
 * Cloned this repository to your local machine with a terminal up and running
