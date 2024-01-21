@@ -1,5 +1,5 @@
 # SpaceScribe: Nasa/ads data collection and versioning
-SpaceScribe is a targeted title generation project where will be generating titles of academic papers to maximize readability based on the reads. 
+SpaceScribe is a targeted title generation project where we will be generating titles of academic papers to maximize readability based on the reads. 
 
 Below you can see the model architecture and the flow of data.
 
@@ -14,7 +14,8 @@ We then use an llm to generate titles from the abstracts, use the pretrained reg
 
 This is the data collection repo for the space scribe project for AI-5. We will be extracting data from the NASA/ADS APIs and uploading to a GCS bucket. We will be developing infrastructure for RLHF fintuning through label studio and using DVC for data versioning. All of these components are different components. 
 
-![image](https://hackmd.io/_uploads/rJKlik5YT.png)
+![image](https://hackmd.io/_uploads/r19oLg5F6.png)
+
 
 ## Usage
 * Have Docker installed
